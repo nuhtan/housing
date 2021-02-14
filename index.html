@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yeet</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #426696;
+            font-weight: 600;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        h2,
+        p {
+            color: #658ec6;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        h3 {
+            color: #426696;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        main {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        li {
+            padding: 2px;
+        }
+
+        li button {
+            border-radius: 2rem;
+            /* border-color: #083a3a; */
+            width: 2rem;
+            /* box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212); */
+            background-color: #fd8383;
+        }
+
+        .glass {
+            background: white;
+            min-height: 80vh;
+            width: 60%;
+            background: linear-gradient(to right bottom,
+                    rgba(255, 255, 255, 0.7),
+                    rgba(255, 255, 255, 0.3));
+            border-radius: 2rem;
+            z-index: 2;
+            backdrop-filter: blur(2rem);
+            display: flex;
+        }
+
+        .circle1,
+        .circle2 {
+            background: white;
+            background: linear-gradient(to right bottom,
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0.3));
+            height: 20rem;
+            width: 20rem;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .circle1 {
+            top: 5%;
+            right: 15%;
+        }
+
+        .circle2 {
+            bottom: 5%;
+            left: 10%;
+        }
+
+        .dashboard {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            text-align: center;
+            background: linear-gradient(to right bottom,
+                    rgba(255, 255, 255, 0.7),
+                    rgba(255, 255, 255, 0.3));
+            border-radius: 2rem;
+        }
+
+        .link {
+            display: flex;
+            margin: 2rem 0rem;
+            padding: 1rem 5rem;
+            align-items: center;
+        }
+
+        .link h2 {
+            padding: 0rem 2rem;
+        }
+
+        .games {
+            flex: 2;
+            margin: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .adder {
+            background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+            border-radius: 2rem;
+            color: white;
+            padding: 1rem;
+            position: relative;
+            width: 60%;
+        }
+
+        .pro h2 {
+            width: 40%;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* GAMES */
+        .status {
+            margin-bottom: 3rem;
+        }
+
+        .status input {
+            background: linear-gradient(to right bottom,
+                    rgba(255, 255, 255, 0.7),
+                    rgba(255, 255, 255, 0.3));
+            border: none;
+            width: 50%;
+            padding: 0.5rem;
+            border-radius: 2rem;
+        }
+
+        .card {
+            display: flex;
+            background: linear-gradient(to left top,
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0.5));
+            border-radius: 1rem;
+            margin: 2rem 0rem;
+            padding: 2rem;
+            box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+            justify-content: space-between;
+        }
+
+        .progress {
+            background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+            width: 100%;
+            height: 25%;
+            border-radius: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: rgb(236, 236, 236);
+            position: absolute;
+            left: 60%;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .percentage {
+            font-weight: bold;
+            background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .name-select {
+            width: 100%;
+            border-radius: 2rem;
+        }
+        .conflict-list {
+            min-height: 60%;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            text-align: right;
+        }
+        .conflict-list-item {
+            list-style-type: none;
+        }
+        .conflict-submit {
+            border-radius: 2rem;
+            width: 3rem;
+        }
+        .submit {
+            border-radius: 2rem;
+            width: 4rem;
+        }
+        .cards {
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            max-height: 35rem;
+        }
+        .floor {
+            width: 10rem
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="glass">
+            <div class="dashboard">
+                <h1>Conflicts</h1>
+                <div class="conflict-list">
+                    <ul id="con-list">
+                        <li class="conflict-list-item">
+                            Elliot - Gary
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nik - Tim
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nik - Gary
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nik - Calvin
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nik - Anne
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Anne - Nathaniel
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Anne - Alex
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Alex - Tim
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Alex - Sasha
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nick - Tim
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nick - Gary
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nick - Sasha
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Gabby - Gary
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Nathaniel - Tim
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                        <li class="conflict-list-item">
+                            Gary - Tim
+                            <button onclick="remove(this)">-</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="adder">
+                    <select class="name-select" name="" id="">
+                        <option>Alex</option>
+                        <option>Anne</option>
+                        <option>Calvin</option>
+                        <option>Elliot</option>
+                        <option>Gabby</option>
+                        <option>Gary</option>
+                        <option>Joseph</option>
+                        <option>Nathaniel</option>
+                        <option>Nick</option>
+                        <option>Nik</option>
+                        <option>Sasha</option>
+                        <option>Tim</option>
+                    </select>
+                    <select class="name-select" name="" id="">
+                        <option>Alex</option>
+                        <option>Anne</option>
+                        <option>Calvin</option>
+                        <option>Elliot</option>
+                        <option>Gabby</option>
+                        <option>Gary</option>
+                        <option>Joseph</option>
+                        <option>Nathaniel</option>
+                        <option>Nick</option>
+                        <option>Nik</option>
+                        <option>Sasha</option>
+                        <option>Tim</option>
+                    </select>
+                    <button onclick="add()" class="conflict-submit">Add</button>
+                </div>
+            </div>
+            <div class="games">
+                <div class="status">
+                    <h1>Possible Configurations:</h1>
+                    <button onclick="generate()" class="submit">Generate</button>
+                </div>
+                <div class="cards" id="cards">
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <script>
+        function add() {
+            let people = document.getElementsByClassName("name-select")
+            let person1 = people[0].value
+            let person2 = people[1].value
+            if (person1 == person2) {
+                return
+            }
+            let li = document.createElement("li")
+            li.classList.add("conflict-list-item")
+            li.appendChild(document.createTextNode(`${person1} - ${person2}\n`))
+            let button = document.createElement("button")
+            button.appendChild(document.createTextNode("-"))
+            button.setAttribute("onclick", "remove(this)")
+            li.appendChild(button)
+            document.getElementById("con-list").appendChild(li)
+        }
+        function remove(button) {
+            // console.log(button.parentElement.innerText.slice(0, button.parentElement.innerText.length - 2))
+            button.parentElement.remove()
+        }
+        async function generate() {
+            // Get all of the conflicts
+            let cons = document.getElementById('con-list')
+            let end = ""
+            Array.prototype.slice.call(cons.children).forEach(con => {
+                let people = con.innerText.slice(0, con.innerText.length - 2)
+                end += `%${people.split(" - ")[0].toLowerCase()}&${people.split(" - ")[1].toLowerCase()}&_&`
+            });
+            end.substr(0, end.length - 2);
+            const response = await fetch(`http://localhost:8020/api/conflict?${end}`);
+            let data = await response.json()
+            console.log(data)
+            let list = document.getElementById('cards')
+            list.innerHTML = ""
+            data.configurations.forEach(config => {
+                let card = document.createElement("div");
+                card.classList.add("card")
+                let cardInfo = document.createElement("div")
+                cardInfo.classList.add("card-info")
+                let floor1 = document.createElement("div");
+                floor1.classList.add("floor");
+                floor1.appendChild(document.createTextNode(`${config.first[0]}`))
+                floor1.appendChild(document.createElement('br'))
+                floor1.appendChild(document.createTextNode(`${config.first[1]}`))
+                floor1.appendChild(document.createElement('br'))
+                floor1.appendChild(document.createTextNode(`${config.first[2]}`))
+                floor1.appendChild(document.createElement('br'))
+                floor1.appendChild(document.createTextNode(`${config.first[3]}`))
+                floor1.appendChild(document.createElement('br'))
+                let floor2 = document.createElement("div");
+                floor2.classList.add("floor");
+                floor2.appendChild(document.createTextNode(`${config.second[0]}`))
+                floor2.appendChild(document.createElement('br'))
+                floor2.appendChild(document.createTextNode(`${config.second[1]}`))
+                floor2.appendChild(document.createElement('br'))
+                floor2.appendChild(document.createTextNode(`${config.second[2]}`))
+                floor2.appendChild(document.createElement('br'))
+                floor2.appendChild(document.createTextNode(`${config.second[3]}`))
+                floor2.appendChild(document.createElement('br'))
+                let floor3 = document.createElement("div");
+                floor3.classList.add("floor");
+                floor3.appendChild(document.createTextNode(`${config.third[0]}`))
+                floor3.appendChild(document.createElement('br'))
+                floor3.appendChild(document.createTextNode(`${config.third[1]}`))
+                floor3.appendChild(document.createElement('br'))
+                floor3.appendChild(document.createTextNode(`${config.third[2]}`))
+                floor3.appendChild(document.createElement('br'))
+                floor3.appendChild(document.createTextNode(`${config.third[3]}`))
+                floor3.appendChild(document.createElement('br'))
+                let h2 = document.createElement('h2')
+                h2.classList.add("percentage")
+                h2.appendChild(document.createTextNode(`Option: ${config.option}`))
+                cardInfo.appendChild(floor1)
+                cardInfo.appendChild(floor2)
+                cardInfo.appendChild(floor3)
+                cardInfo.append(h2)
+                card.appendChild(cardInfo)
+                list.appendChild(card)
+            })
+        }
+    </script>
+</body>
+
+</html>
